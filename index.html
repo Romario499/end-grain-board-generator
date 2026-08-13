@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#20343a">
+    <title>Торец — редактор узоров</title>
+    <link rel="stylesheet" href="./src/styles/app.css">
+  </head>
+  <body>
+    <div class="app" id="app">
+      <header class="topbar">
+        <div class="brand" aria-label="Торец">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div><strong>Торец</strong><small>торцевые доски</small></div>
+        </div>
+        <label class="project-name"><span class="sr-only">Название проекта</span><input id="project-name" maxlength="80"></label>
+        <nav class="project-actions" aria-label="Проект">
+          <button id="new-project" class="button ghost">Новый</button>
+          <button id="open-project" class="button ghost">Открыть</button>
+          <button id="save-project" class="button">Сохранить</button>
+          <button id="export-project" class="button accent">Экспорт PNG</button>
+        </nav>
+      </header>
+
+      <main class="workspace">
+        <aside class="panel material-panel">
+          <div class="panel-heading"><span>01</span><div><h2>Материал</h2><p>Выберите и проведите по ячейкам.</p></div></div>
+          <div id="materials" class="materials"></div>
+          <div class="segmented" aria-label="Инструмент">
+            <button id="tool-paint" data-tool="paint">Кисть</button>
+            <button id="tool-select" data-tool="select">Выбор</button>
+          </div>
+          <div class="selection-box">
+            <small>Выбрано</small>
+            <strong id="selection-count">0</strong>
+            <span>ячеек</span>
+          </div>
+        </aside>
+
+        <section class="board-stage" aria-label="Рабочая область">
+          <div class="stage-label"><span>Вид сверху</span><span id="board-summary"></span></div>
+          <div class="jig" id="canvas-wrap">
+            <div class="ruler ruler-x" aria-hidden="true"></div>
+            <div class="ruler ruler-y" aria-hidden="true"></div>
+            <canvas id="board-canvas" aria-label="Узор доски"></canvas>
+          </div>
+          <p class="stage-hint">Клик — одна ячейка. Протяните кисть или рамку выбора.
+          </p>
+        </section>
+
+        <aside class="panel controls-panel">
+          <div class="panel-heading"><span>02</span><div><h2>Доска</h2><p>Размеры и сетка.</p></div></div>
+          <div class="fields three">
+            <label>Длина, мм<input id="length-mm" type="number" min="50" max="3000" step="0.1"></label>
+            <label>Ширина, мм<input id="width-mm" type="number" min="50" max="3000" step="0.1"></label>
+            <label>Толщина, мм<input id="thickness-mm" type="number" min="5" max="300" step="0.1"></label>
+          </div>
+          <div class="fields two">
+            <label>Столбцы<input id="grid-columns" type="number" min="1" max="64" step="1"></label>
+            <label>Строки<input id="grid-rows" type="number" min="1" max="64" step="1"></label>
+          </div>
+
+          <div class="panel-heading compact"><span>03</span><div><h2>Ориентация</h2><p>Для выбранных ячеек.</p></div></div>
+          <div class="transform-grid">
+            <button id="rotate-cw" class="tool-button"><span aria-hidden="true">↻</span>Повернуть</button>
+            <button id="mirror-lr" class="tool-button"><span aria-hidden="true">↔</span>Слева направо</button>
+            <button id="mirror-tb" class="tool-button"><span aria-hidden="true">↕</span>Сверху вниз</button>
+          </div>
+
+          <div class="limits-note"><strong>P0</strong><span>Цвета и текстуры условны. Техкарта не рассчитывается.</span></div>
+        </aside>
+      </main>
+
+      <footer class="statusbar"><span id="save-state"></span><span id="error-message" role="alert"></span><span>offline · schema v1</span></footer>
+
+      <dialog id="open-dialog"><form method="dialog"><header><h2>Открыть проект</h2><button value="cancel" aria-label="Закрыть">×</button></header><div id="project-list" class="project-list"></div></form></dialog>
+      <dialog id="unsaved-dialog"><form method="dialog"><h2>Есть несохранённые изменения</h2><p>Сохранить их перед переходом?</p><div class="dialog-actions"><button value="cancel" data-decision="cancel">Отмена</button><button value="discard" data-decision="discard">Не сохранять</button><button value="save" data-decision="save" class="accent">Сохранить</button></div></form></dialog>
+      <dialog id="resize-dialog"><form method="dialog"><h2>Уменьшить сетку?</h2><p>Ячейки справа или снизу будут удалены.</p><div class="dialog-actions"><button value="cancel">Отмена</button><button value="confirm" class="accent">Уменьшить</button></div></form></dialog>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
