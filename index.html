@@ -4,51 +4,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#20343a">
-    <title>Торец — генератор торцевых досок</title>
+    <title>DREVOCOD — End Grain Studio</title>
     <link rel="stylesheet" href="./src/styles/app.css">
   </head>
   <body>
     <div class="app" id="app">
       <header class="topbar">
-        <div class="brand" aria-label="Торец"><span class="brand-mark" aria-hidden="true"></span><div><strong>Торец</strong><small>workshop generator</small></div></div>
+        <div class="brand" aria-label="DREVOCOD End Grain Studio"><span class="brand-mark" aria-hidden="true"></span><div><strong>DREVOCOD</strong><small>END GRAIN STUDIO</small></div></div>
         <label class="project-name"><span class="sr-only">Название проекта</span><input id="project-name" maxlength="80"></label>
-        <nav class="project-actions" aria-label="Проект">
-          <button id="new-project" class="button ghost">Новый</button><button id="open-project" class="button ghost">Открыть</button><button id="save-project" class="button">Сохранить</button><button id="export-project" class="button accent">Экспорт PNG</button>
-        </nav>
+        <nav class="project-actions" aria-label="Проект"><button id="new-project" class="button ghost">Новый вариант</button><button id="open-project" class="button ghost">Открыть</button><button id="save-project" class="button">Сохранить</button><button id="export-project" class="button accent">Экспорт PNG</button></nav>
       </header>
 
       <main class="workspace">
         <aside class="panel material-panel">
-          <div class="panel-heading"><span>01</span><div><h2>Материал</h2><p>Выберите породу и рисуйте вручную.</p></div></div>
+          <div class="panel-heading"><span>01</span><div><h2>American hardwoods</h2><p>Палитра CUBE 18 для рынка США.</p></div></div>
           <div id="materials" class="materials"></div>
           <div class="segmented" aria-label="Инструмент"><button id="tool-paint" data-tool="paint">Кисть</button><button id="tool-select" data-tool="select">Выбор</button></div>
           <div class="selection-box"><small>Выбрано</small><strong id="selection-count">0</strong><span>ячеек</span></div>
-          <div class="workshop-note"><strong>V1 WORKSHOP</strong><span>Узор, размеры и технологическая оценка живут в одном проекте.</span></div>
+          <div class="workshop-note"><strong>COMPETITION BUILD</strong><span>Functional geometry. Built in end grain.</span></div>
         </aside>
 
         <section class="board-stage" aria-label="Рабочая область">
           <div class="stage-label"><span id="pattern-label">Свободный узор</span><span id="board-summary"></span></div>
-          <div class="jig" id="canvas-wrap"><div class="ruler ruler-x" aria-hidden="true"></div><div class="ruler ruler-y" aria-hidden="true"></div><canvas id="board-canvas" aria-label="Узор доски"></canvas></div>
-          <p class="stage-hint">Рисуйте вручную или создайте воспроизводимый узор по seed.</p>
+          <div class="jig" id="canvas-wrap"><div class="ruler ruler-x" aria-hidden="true"></div><div class="ruler ruler-y" aria-hidden="true"></div><canvas id="board-canvas" aria-label="Узор торцевой доски"></canvas></div>
+          <p class="stage-hint">End Grain Studio связывает узор, реальные породы и воспроизводимый рецепт мастерской.</p>
         </section>
 
         <aside class="panel controls-panel">
           <section>
-            <div class="panel-heading"><span>02</span><div><h2>Доска</h2><p>Чистовые размеры и сетка.</p></div></div>
+            <div class="panel-heading"><span>02</span><div><h2>Board spec</h2><p>Чистовые размеры и сетка.</p></div></div>
             <div class="fields board-fields"><label>Длина, мм<input id="length-mm" type="number" min="50" max="3000" step="0.1"></label><label>Ширина, мм<input id="width-mm" type="number" min="50" max="3000" step="0.1"></label><label>Толщина, мм<input id="thickness-mm" type="number" min="5" max="300" step="0.1"></label></div>
             <div class="fields two"><label>Столбцы<input id="grid-columns" type="number" min="1" max="64" step="1"></label><label>Строки<input id="grid-rows" type="number" min="1" max="64" step="1"></label></div>
           </section>
 
           <section class="generator-card">
-            <div class="panel-heading compact"><span>03</span><div><h2>Генератор</h2><p>Шахматная переклейка из одной панели.</p></div></div>
-            <label class="field-label">Шаблон<select id="pattern-template"><option value="classic-checkerboard-reverse-slices">Шахматная переклейка</option></select></label>
-            <div class="fields two"><label>Материал A<select id="pattern-material-a"></select></label><label>Материал B<select id="pattern-material-b"></select></label></div>
+            <div class="panel-heading compact"><span>03</span><div><h2>Pattern lab</h2><p>Первый проверяемый рецепт End Grain Studio.</p></div></div>
+            <label class="field-label">Шаблон<select id="pattern-template"><option value="classic-checkerboard-reverse-slices">Classic checkerboard · reverse slices</option></select></label>
+            <div class="fields two"><label>Свет / Material A<select id="pattern-material-a"></select></label><label>Тень / Material B<select id="pattern-material-b"></select></label></div>
             <label class="field-label">Seed<input id="pattern-seed" inputmode="text" value="42"></label>
-            <div class="generator-actions"><button id="surprise-pattern" class="button ghost-dark">Удивить меня</button><button id="generate-pattern" class="button accent">Создать узор</button></div>
+            <div class="generator-actions"><button id="surprise-pattern" class="button ghost-dark">Удивить меня</button><button id="generate-pattern" class="button accent">Собрать узор</button></div>
           </section>
 
           <section>
-            <div class="panel-heading compact"><span>04</span><div><h2>Изготовление</h2><p>Пропилы и припуски на обработку.</p></div></div>
+            <div class="panel-heading compact"><span>04</span><div><h2>Workshop recipe</h2><p>Пропилы и припуски на обработку.</p></div></div>
             <div class="fields two manufacturing-fields"><label>Пропил, мм<input id="kerf-mm" type="number" min="0" step="0.1" value="3.2"></label><label>Торцевание/стор., мм<input id="end-trim-mm" type="number" min="0" step="0.1" value="5"></label><label>Обрезка X/стор., мм<input id="trim-x-mm" type="number" min="0" step="0.1" value="5"></label><label>Обрезка Y/стор., мм<input id="trim-y-mm" type="number" min="0" step="0.1" value="5"></label><label>Строгание/пл., мм<input id="planing-mm" type="number" min="0" step="0.1" value="1"></label><label>Шлифовка/пл., мм<input id="sanding-mm" type="number" min="0" step="0.1" value="0.5"></label></div>
             <div class="recipe-status"><span id="recipe-status">ОЦЕНКА</span><small id="recipe-diagnostic">Заполните склад для полной проверки реализуемости.</small></div>
             <div class="metrics"><div><span>Ячейка</span><strong id="recipe-cell">—</strong></div><div><span>Срез</span><strong id="recipe-slice">—</strong></div><div><span>Первая панель</span><strong id="recipe-panel">—</strong></div><div><span>Поперечных пилов</span><strong id="recipe-cuts">—</strong></div><div><span>Заготовка</span><strong id="recipe-gross">—</strong></div><div><span>Отход</span><strong id="recipe-waste">—</strong></div></div>
@@ -56,14 +54,11 @@
             <button id="print-recipe" class="button print-button">Печать инструкции</button>
           </section>
 
-          <section>
-            <div class="panel-heading compact"><span>05</span><div><h2>Ориентация</h2><p>Для выбранных ячеек.</p></div></div>
-            <div class="transform-grid"><button id="rotate-cw" class="tool-button"><span aria-hidden="true">↻</span>Повернуть</button><button id="mirror-lr" class="tool-button"><span aria-hidden="true">↔</span>Слева направо</button><button id="mirror-tb" class="tool-button"><span aria-hidden="true">↕</span>Сверху вниз</button></div>
-          </section>
+          <section><div class="panel-heading compact"><span>05</span><div><h2>Orientation</h2><p>Для выбранных ячеек.</p></div></div><div class="transform-grid"><button id="rotate-cw" class="tool-button"><span aria-hidden="true">↻</span>Повернуть</button><button id="mirror-lr" class="tool-button"><span aria-hidden="true">↔</span>Слева направо</button><button id="mirror-tb" class="tool-button"><span aria-hidden="true">↕</span>Сверху вниз</button></div></section>
         </aside>
       </main>
 
-      <footer class="statusbar"><span id="save-state"></span><span id="error-message" role="alert"></span><span>offline · schema v2 · deterministic</span></footer>
+      <footer class="statusbar"><span id="save-state"></span><span id="error-message" role="alert"></span><span>DREVOCOD · competition build · schema v2</span></footer>
       <dialog id="open-dialog"><form method="dialog"><header><h2>Открыть проект</h2><button value="cancel" aria-label="Закрыть">×</button></header><div id="project-list" class="project-list"></div></form></dialog>
       <dialog id="unsaved-dialog"><form method="dialog"><h2>Есть несохранённые изменения</h2><p>Сохранить их перед переходом?</p><div class="dialog-actions"><button value="cancel" data-decision="cancel">Отмена</button><button value="discard" data-decision="discard">Не сохранять</button><button value="save" data-decision="save" class="accent">Сохранить</button></div></form></dialog>
       <dialog id="resize-dialog"><form method="dialog"><h2>Уменьшить сетку?</h2><p>Ячейки справа или снизу будут удалены.</p><div class="dialog-actions"><button value="cancel">Отмена</button><button value="confirm" class="accent">Уменьшить</button></div></form></dialog>
