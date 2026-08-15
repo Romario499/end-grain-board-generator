@@ -1,23 +1,55 @@
+const MARKET_CHECKED_AT = '2026-08-15';
+
 export const BUILT_IN_MATERIALS = Object.freeze([
   Object.freeze({
     id: 'maple',
     name: 'American hard maple',
+    scientificName: 'Acer saccharum',
+    marketRegion: 'US',
     baseColor: '#d8b77f',
     accentColor: '#9a6a32',
     textureKey: 'american-hard-maple-end-grain',
+    densityKgM3: 705,
+    jankaHardnessN: 6450,
+    marketOffer: Object.freeze({
+      supplier: 'Woodworkers Source', sku: 'hmap84', nominalThickness: '8/4', surfacedThicknessIn: 1.8125,
+      widthRangeIn: Object.freeze([4, 8]), lengthRangeFt: Object.freeze([6, 12]), soldBy: 'board-foot',
+      referencePriceUsdPerBoardFoot: 9.99, checkedAt: MARKET_CHECKED_AT,
+      url: 'https://www.woodworkerssource.com/hard-white-maple/maple-hard-white-84-lumber.html',
+    }),
   }),
   Object.freeze({
     id: 'walnut',
     name: 'American black walnut',
+    scientificName: 'Juglans nigra',
+    marketRegion: 'US',
     baseColor: '#503124',
     accentColor: '#241008',
     textureKey: 'american-black-walnut-end-grain',
+    densityKgM3: 609,
+    jankaHardnessN: 4492,
+    marketOffer: Object.freeze({
+      supplier: 'Woodworkers Source', sku: 'wal84', nominalThickness: '8/4', surfacedThicknessIn: 1.8125,
+      widthRangeIn: Object.freeze([4, 7]), lengthRangeFt: Object.freeze([6, 12]), soldBy: 'board-foot',
+      referencePriceUsdPerBoardFoot: 19.99, checkedAt: MARKET_CHECKED_AT,
+      url: 'https://www.woodworkerssource.com/walnut/premium-black-walnut-84-lumber.html',
+    }),
   }),
   Object.freeze({
     id: 'cherry',
     name: 'American black cherry',
+    scientificName: 'Prunus serotina',
+    marketRegion: 'US',
     baseColor: '#a75d3d',
     accentColor: '#713419',
     textureKey: 'american-black-cherry-end-grain',
+    densityKgM3: 561,
+    jankaHardnessN: 4226,
+    marketOffer: Object.freeze({
+      supplier: 'Woodworkers Source', sku: 'cherry-8-4', nominalThickness: '8/4', surfacedThicknessIn: null,
+      widthRangeIn: null, lengthRangeFt: null, soldBy: 'board-foot',
+      referencePriceUsdPerBoardFoot: 8.99, checkedAt: MARKET_CHECKED_AT,
+      url: 'https://www.woodworkerssource.com/lumber/cherry.html',
+    }),
   }),
 ]);
