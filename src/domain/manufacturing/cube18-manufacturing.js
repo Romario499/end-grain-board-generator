@@ -1,4 +1,5 @@
 const SIN_60 = Math.sqrt(3) / 2;
+const BOARD_FOOT_MM3 = 144 * (25.4 ** 3);
 
 function round(value, digits = 3) {
   const factor = 10 ** digits;
@@ -73,6 +74,23 @@ export function calculateCube18Manufacturing(input = {}) {
     sum + row.preparedStripLengthMm * row.preparedStripWidthMm * row.preparedStripThicknessMm
   ), 0);
   const wasteMm3 = Math.max(0, grossMm3 - netMm3);
+  const pricing = manufacturing.pricing ?? {};
+  const rates = pricing.boardFootPerMaterial ?? {};
+  const costsByMaterial = byMaterial.map((row) => {
+    const volumeMm3 = row.preparedStripLengthMm * row.preparedStripWidthMm * row.preparedStripThicknessMm;
+    const boardFeet = volumeMm3 / BOARD_FOOT_MM3;
+    const ratePerBoardFoot = nonNegative(rates[row.materialId]);
+    return {
+      materialId: row.materialId,
+      boardFeet: round(boardFeet),
+      ratePerBoardFoot: round(ratePerBoardFoot, 2),
+      materialCost: round(boardFeet * ratePerBoardFoot, 2),
+    };
+  });
+  const pricedMaterialCount = costsByMaterial.filter((row) => row.ratePerBoardFoot > 0).length;
+  const materialSubtotal = round(costsByMaterial.reduce((sum, row) => sum + row.materialCost, 0), 2);
+  const consumables = round(nonNegative(pricing.consumables), 2);
+  const missingMaterialIds = costsByMaterial.filter((row) => row.ratePerBoardFoot <= 0).map((row) => row.materialId);
   const diagnostics = [];
   const maxLength = manufacturing.equipment?.maxLengthMm;
   if (Number.isFinite(maxLength) && byMaterial.some((row) => row.preparedStripLengthMm > maxLength)) {
@@ -114,6 +132,17 @@ export function calculateCube18Manufacturing(input = {}) {
       grossMm3: round(grossMm3),
       wasteMm3: round(wasteMm3),
       wastePercent: round((wasteMm3 / grossMm3) * 100, 2),
+    },
+    costs: {
+      currency: typeof pricing.currency === 'string' && pricing.currency ? pricing.currency : 'USD',
+      complete: missingMaterialIds.length === 0,
+      pricedMaterialCount,
+      missingMaterialIds,
+      byMaterial: costsByMaterial,
+      materialSubtotal,
+      consumables,
+      estimatedTotal: round(materialSubtotal + consumables, 2),
+      stockBoundary: 'prepared-strips',
     },
     diagnostics,
     verification: {
