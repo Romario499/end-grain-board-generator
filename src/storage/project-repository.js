@@ -19,7 +19,7 @@ function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
-export function createProjectRepository({ storage, validator, clock }) {
+export function createProjectRepository({ storage, validator, migrate = null, clock }) {
   function validate(project) {
     const result = validator(project);
     if (result.ok) return;
@@ -28,6 +28,22 @@ export function createProjectRepository({ storage, validator, clock }) {
       unsupported ? 'UNSUPPORTED_SCHEMA' : 'PROJECT_CORRUPT',
       unsupported ? 'Версия проекта не поддерживается.' : 'Проект повреждён.',
     );
+  }
+
+  function prepare(project) {
+    let prepared;
+    try {
+      prepared = migrate ? migrate(project) : clone(project);
+    } catch (error) {
+      const unsupported = error?.code === 'UNSUPPORTED_SCHEMA';
+      throw new ProjectRepositoryError(
+        unsupported ? 'UNSUPPORTED_SCHEMA' : 'PROJECT_CORRUPT',
+        unsupported ? 'Версия проекта не поддерживается.' : 'Проект повреждён.',
+        error,
+      );
+    }
+    validate(prepared);
+    return prepared;
   }
 
   function readCatalog() {
@@ -52,8 +68,7 @@ export function createProjectRepository({ storage, validator, clock }) {
   }
 
   function save(project) {
-    const saved = clone({ ...project, updatedAt: clock() });
-    validate(saved);
+    const saved = prepare({ ...project, updatedAt: clock() });
     const catalog = readCatalog();
     const nextCatalog = {
       schemaVersion: 1,
@@ -72,14 +87,12 @@ export function createProjectRepository({ storage, validator, clock }) {
     if (!project) {
       throw new ProjectRepositoryError('PROJECT_NOT_FOUND', 'Проект не найден.');
     }
-    validate(project);
-    return clone(project);
+    return clone(prepare(project));
   }
 
   function list() {
-    const projects = Object.values(readCatalog().projects);
-    projects.forEach(validate);
-    return projects
+    return Object.values(readCatalog().projects)
+      .map(prepare)
       .map(({ id, name, updatedAt }) => ({ id, name, updatedAt }))
       .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
   }
