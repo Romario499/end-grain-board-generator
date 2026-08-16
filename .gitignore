@@ -20,3 +20,6 @@ Desktop.ini
 
 # Local reference library; not used by the application
 /Foto/
+
+# Local agent workspace and backups; retained outside the product repository.
+/.superpowers/

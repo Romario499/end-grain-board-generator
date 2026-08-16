@@ -1,0 +1,3 @@
+# Preserve intentional Markdown hard breaks in imported source material.
+brand/presentation-text.md whitespace=-trailing-space
+docs/business/source-snapshots/** whitespace=-trailing-space
