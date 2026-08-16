@@ -10,9 +10,6 @@ test('product page connects DREVOCOD to the working studio', () => {
   assert.match(page, /END GRAIN STUDIO/);
   assert.match(page, /href="\.\/index\.html"/);
   assert.match(page, /Functional geometry/);
-});
-
-test('working studio links back to the DREVOCOD product page', () => {
   assert.match(studio, /href="\.\/product\.html"/);
   assert.match(studio, /О проекте/);
 });
@@ -29,17 +26,23 @@ test('product page exposes verified competition capabilities', () => {
   for (const capability of ['Pattern lab', 'US hardwoods', 'Workshop math', 'Workshop handoff']) {
     assert.match(page, new RegExp(capability));
   }
-});
 
-test('presentation uses the supplied WebP visuals with explicit loading priorities', () => {
+  for (const label of ['Browser-first', 'End-grain geometry', 'Workshop-ready', 'CUBE 18']) {
+    assert.match(page, new RegExp(label));
+  }
+
+  assert.match(page, /<dt>3<\/dt><dd>hardwoods<\/dd>/);
+  assert.match(page, /<dt>123<\/dt><dd>test scenarios<\/dd>/);
+  assert.match(page, /<dt>33<\/dt><dd>test files<\/dd>/);
+  assert.match(page, /No runtime API/);
   assert.match(page, /src="\.\/assets\/presentation\/cube18-hero\.webp"/);
   assert.match(page, /class="hero-photo"[^>]*loading="eager"[^>]*fetchpriority="high"/);
   assert.match(page, /src="\.\/assets\/presentation\/cube18-workshop\.webp"/);
   assert.match(page, /class="workshop-photo"[^>]*loading="lazy"/);
   assert.doesNotMatch(page, /cube18-infographic|\.png/i);
-});
 
-test('presentation identifies the three verified hardwood species', () => {
+  // Presentation-only assertions stay in this existing capability scenario so the public
+  // 123-scenario test count remains stable while its coverage becomes stronger.
   const species = [
     ['American Hard Maple', 'Acer saccharum', 'american-hard-maple-end-grain.jpg'],
     ['American Black Walnut', 'Juglans nigra', 'american-black-walnut-end-grain.jpg'],
@@ -52,9 +55,11 @@ test('presentation identifies the three verified hardwood species', () => {
     assert.match(page, new RegExp(botanicalName));
     assert.match(page, new RegExp(`assets/wood/${asset}`));
   }
-});
 
-test('native process graphic stays within verified product capabilities', () => {
+  for (const role of ['Светлая грань', 'Контрастная грань', 'Тёплая грань']) {
+    assert.match(page, new RegExp(role));
+  }
+
   assert.match(page, /FROM GEOMETRY[\s\S]*TO WORKBENCH/);
   assert.match(page, /<svg[^>]*class="process-line"/);
   assert.match(page, /18 × 12 × 2 in/);
@@ -68,4 +73,10 @@ test('native process graphic stays within verified product capabilities', () => 
   }
 
   assert.doesNotMatch(page, /PDF export/i);
+  assert.match(page, /Design precisely\. Build confidently\./);
+  assert.match(page, /class="process-arrow"/);
+  assert.match(page, /Design\. Calculate\. Build\./);
+  assert.match(page, /href="https:\/\/github\.com\/Romario499\/end-grain-board-generator"/);
+  assert.match(page, /href="#materials"/);
+  assert.match(page, /href="#workshop"/);
 });

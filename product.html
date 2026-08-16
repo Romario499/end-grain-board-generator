@@ -32,6 +32,9 @@
             <a class="button primary" href="./index.html">Запустить End Grain Studio</a>
             <a class="button secondary" href="#proof">Посмотреть доказательства</a>
           </div>
+          <ul class="hero-tags" aria-label="Ключевые свойства продукта">
+            <li>Browser-first</li><li>End-grain geometry</li><li>Workshop-ready</li><li>CUBE 18</li>
+          </ul>
           <dl class="hero-facts">
             <div><dt>3</dt><dd>американские породы</dd></div>
             <div><dt>Seed</dt><dd>повторяемый узор</dd></div>
@@ -59,6 +62,12 @@
 
       <section id="proof" class="proof section-shell">
         <div class="section-heading"><p>01 · WORKING PROOF</p><h2>Красивый узор, который можно повторить</h2><span>Каждое обещание на этой странице связано с работающей функцией конкурсной сборки.</span></div>
+        <dl class="proof-metrics" aria-label="Проверенные показатели проекта">
+          <div><dt>3</dt><dd>hardwoods</dd></div>
+          <div><dt>123</dt><dd>test scenarios</dd></div>
+          <div><dt>33</dt><dd>test files</dd></div>
+          <div><dt>Local</dt><dd>No runtime API</dd></div>
+        </dl>
         <div class="proof-grid">
           <article><span class="proof-no">01</span><h3>Pattern lab</h3><p>Seeded-генерация создаёт воспроизводимую шахматную геометрию. Один seed — один и тот же результат.</p><b>Готово</b></article>
           <article><span class="proof-no">02</span><h3>US hardwoods</h3><p>American hard maple, black walnut и black cherry привязаны к реальным породам, размерам 8/4 и рыночным снимкам поставщиков.</p><b>Готово</b></article>
@@ -99,15 +108,15 @@
         <div class="materials-grid">
           <article>
             <figure><img loading="lazy" decoding="async" src="./assets/wood/american-hard-maple-end-grain.jpg" alt="Торцевой срез American Hard Maple"></figure>
-            <div><span class="material-index">01 · LIGHT</span><h3>American Hard Maple</h3><p><i>Acer saccharum</i></p></div>
+            <div><span class="material-index">01 · LIGHT</span><h3>American Hard Maple</h3><p><i>Acer saccharum</i></p><small>Светлая грань · ясная геометрия</small></div>
           </article>
           <article>
             <figure><img loading="lazy" decoding="async" src="./assets/wood/american-black-walnut-end-grain.jpg" alt="Торцевой срез American Black Walnut"></figure>
-            <div><span class="material-index">02 · SHADOW</span><h3>American Black Walnut</h3><p><i>Juglans nigra</i></p></div>
+            <div><span class="material-index">02 · SHADOW</span><h3>American Black Walnut</h3><p><i>Juglans nigra</i></p><small>Контрастная грань · визуальная глубина</small></div>
           </article>
           <article>
             <figure><img loading="lazy" decoding="async" src="./assets/wood/american-black-cherry-end-grain.jpg" alt="Торцевой срез American Black Cherry"></figure>
-            <div><span class="material-index">03 · WARMTH</span><h3>American Black Cherry</h3><p><i>Prunus serotina</i></p></div>
+            <div><span class="material-index">03 · WARMTH</span><h3>American Black Cherry</h3><p><i>Prunus serotina</i></p><small>Тёплая грань · медный переход</small></div>
           </article>
         </div>
       </section>
@@ -115,7 +124,7 @@
       <section class="process-section section-shell" aria-labelledby="process-title">
         <div class="process-intro">
           <p>04 · VERIFIED PIPELINE</p>
-          <h2 id="process-title">FROM GEOMETRY TO WORKBENCH</h2>
+          <div class="process-title"><h2 id="process-title">FROM GEOMETRY TO WORKBENCH</h2><span>Design precisely. Build confidently.</span></div>
           <div class="dimension-callout"><span>CUBE 18</span><strong>18 × 12 × 2 in</strong></div>
         </div>
         <div class="process-diagram">
@@ -124,10 +133,10 @@
             <g><circle cx="20" cy="44" r="8"/><circle cx="260" cy="44" r="8"/><circle cx="500" cy="44" r="8"/><circle cx="740" cy="44" r="8"/><circle cx="980" cy="44" r="8"/></g>
           </svg>
           <ol>
-            <li><span>01 DESIGN</span><p>Pattern / Seed / Materials</p></li>
-            <li><span>02 SPECIFY</span><p>Length / Width / Thickness / Grid</p></li>
-            <li><span>03 CALCULATE</span><p>Kerf / Angles / Cuts / Board Feet / Waste</p></li>
-            <li><span>04 BUILD</span><p>Workshop Recipe</p></li>
+            <li><span>01 DESIGN</span><p>Pattern / Seed / Materials</p><i class="process-arrow" aria-hidden="true">→</i></li>
+            <li><span>02 SPECIFY</span><p>Length / Width / Thickness / Grid</p><i class="process-arrow" aria-hidden="true">→</i></li>
+            <li><span>03 CALCULATE</span><p>Kerf / Angles / Cuts / Board Feet / Waste</p><i class="process-arrow" aria-hidden="true">→</i></li>
+            <li><span>04 BUILD</span><p>Workshop Recipe</p><i class="process-arrow" aria-hidden="true">→</i></li>
             <li><span>05 EXPORT</span><p>PNG / Print / Saved Project</p></li>
           </ol>
         </div>
@@ -141,8 +150,10 @@
 
       <section class="final-cta">
         <p>DREVOCOD · END GRAIN STUDIO</p>
-        <h2>Спроектируйте доску, которую можно построить.</h2>
-        <a class="button primary" href="./index.html">Открыть рабочую студию</a>
+        <h2>Design. Calculate. Build.</h2>
+        <span>Спроектируйте доску, которую можно построить.</span>
+        <div class="final-actions"><a class="button primary" href="./index.html">Открыть рабочую студию</a><a class="button secondary" href="https://github.com/Romario499/end-grain-board-generator">Исходный код</a></div>
+        <nav class="chapter-links" aria-label="Разделы презентации"><a href="#materials">Материалы</a><a href="#workshop">Мастерская</a><a href="#proof">Доказательства</a></nav>
       </section>
     </main>
 
