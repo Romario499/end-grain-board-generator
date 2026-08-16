@@ -3,12 +3,18 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const page = await readFile(new URL('../../product.html', import.meta.url), 'utf8');
+const studio = await readFile(new URL('../../index.html', import.meta.url), 'utf8');
 
 test('product page connects DREVOCOD to the working studio', () => {
   assert.match(page, /DREVOCOD/);
   assert.match(page, /END GRAIN STUDIO/);
   assert.match(page, /href="\.\/index\.html"/);
   assert.match(page, /Functional geometry/);
+});
+
+test('working studio links back to the DREVOCOD product page', () => {
+  assert.match(studio, /href="\.\/product\.html"/);
+  assert.match(studio, /О проекте/);
 });
 
 test('product page presents CUBE 18 as a digital MVP with an honest physical-validation boundary', () => {
