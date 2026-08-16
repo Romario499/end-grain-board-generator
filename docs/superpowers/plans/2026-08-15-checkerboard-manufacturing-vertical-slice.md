@@ -33,7 +33,6 @@
 - В рабочем дереве уже есть незакоммиченный RED-цикл: `project-v2.js`, `project-migration.js`, `units.js` и три test-файла.
 - Текущая база: 71 тест, 66 проходят, 5 падают.
 - Эти файлы не удаляются. Task 1 приводит их к утверждённой additive-схеме и завершает RED → GREEN.
-- Независимый `docs/superpowers/specs/2026-08-15-drevocod-business-cube18-design.md` не входит в этот план и не добавляется в коммиты.
 
 ## File Map
 
